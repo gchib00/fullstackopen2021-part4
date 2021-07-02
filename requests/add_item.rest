@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+content-type: application/json
+
+{
+  "title": "Tomahawk Steak",
+  "author": "Mike",
+  "url": "https://iamafoodblog.com/tomahawk-steak/",
+  "likes": 1
+}
