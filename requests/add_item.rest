@@ -1,9 +1,9 @@
-POST http://localhost:3003/api/blogs
+POST http://localhost:3001/api/blogs
 content-type: application/json
 
 {
-  "title": "Tomahawk Steak",
-  "author": "Mike",
-  "url": "https://iamafoodblog.com/tomahawk-steak/",
-  "likes": 1
+  "title": "Instant Pot Chicken Breast",
+  "author": "Stephanie",
+  "url": "https://iamafoodblog.com/instant-pot-chicken-breast/",
+  "likes": 0
 }
