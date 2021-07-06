@@ -1,9 +1,14 @@
+/* eslint-disable no-undef */
 const info = (content) => {
-  console.log(content)
+  if (process.env.NODE_ENV !== 'test') { 
+    console.log(content)
+  }
 }
 
 const error = (content) => {
-  console.error(content)
+  if (process.env.NODE_ENV !== 'test') { 
+    console.log(content)
+  }
 }
 
 module.exports = {
