@@ -11,6 +11,7 @@ test('blogs are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
+
 test('a valid blog can be added', async () => {
   const allBlogs = await Blog.find({})
 
@@ -38,7 +39,7 @@ test('a valid blog can be added', async () => {
 })
 
 
-test('note without content is not added', async () => {
+test('blog without title is not added', async () => {
   const allBlogs = await Blog.find({})
 
   const newBlog = {
@@ -53,6 +54,24 @@ test('note without content is not added', async () => {
   const response = await api.get('/api/blogs')
 
   expect(response.body).toHaveLength(allBlogs.length)
+})
+
+test('blog with undefined likes will get 0 likes automatically', async () => {
+  let allBlogs = await Blog.find({})
+
+  let newBlog = {
+    title: 'Generic blog about food',
+    author: 'Marc Angelo',
+    url: 'www.foodblog.com'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+
+  newBlog = allBlogs[allBlogs.length-1]
+  expect(newBlog.likes).toBe(0)
 })
 
 
