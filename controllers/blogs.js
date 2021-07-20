@@ -6,6 +6,11 @@ blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({})
   response.json(blogs)
 }) 
+
+blogsRouter.delete('/:id/', async (request, response) => {
+  await Blog.findByIdAndRemove(request.params.id)
+  response.status(204).end()
+}) 
   
 blogsRouter.post('/', (request, response) => {
   logger.error(`request is equal to: ${request}`)
@@ -28,5 +33,7 @@ blogsRouter.post('/', (request, response) => {
     addBlog()
   }
 })
+
+
 
 module.exports = blogsRouter

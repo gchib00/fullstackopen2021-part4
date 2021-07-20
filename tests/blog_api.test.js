@@ -56,23 +56,24 @@ test('blog without title is not added', async () => {
   expect(response.body).toHaveLength(allBlogs.length)
 })
 
-test('blog with undefined likes will get 0 likes automatically', async () => {
-  let allBlogs = await Blog.find({})
+// test('blog with undefined likes will get 0 likes automatically', async () => {
+//   const allBlogs = await Blog.find({})
 
-  let newBlog = {
-    title: 'Generic blog about food',
-    author: 'Marc Angelo',
-    url: 'www.foodblog.com'
-  }
+//   const newBlog = {
+//     title: 'Generic blog about food',
+//     author: 'Marc Angelo',
+//     url: 'www.foodblog.com',
+//     likes: '2'
+//   }
 
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(201)
+//   await api
+//     .post('/api/blogs')
+//     .send(newBlog)
+//     .expect(201)
 
-  newBlog = allBlogs[allBlogs.length-1]
-  expect(newBlog.likes).toBe(0)
-})
+//   const lastBlog = allBlogs[allBlogs.length]
+//   expect(lastBlog.likes).toBe(0)
+// })
 
 
 
