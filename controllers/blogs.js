@@ -11,6 +11,22 @@ blogsRouter.delete('/:id/', async (request, response) => {
   await Blog.findByIdAndRemove(request.params.id)
   response.status(204).end()
 }) 
+
+// eslint-disable-next-line no-unused-vars
+blogsRouter.put('/:id', async (request, response) => {
+  const id = request.params.id
+  const body = request.body
+  const updatedBlog = {
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes
+  }
+  await Blog.findByIdAndUpdate(id, updatedBlog, { new: true })
+  response.json(updatedBlog)
+  response.status(200).end()
+  
+})
   
 blogsRouter.post('/', (request, response) => {
   logger.error(`request is equal to: ${request}`)
