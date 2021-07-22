@@ -4,18 +4,19 @@ const app = require('../app')
 const api = supertest(app)
 const Blog = require('../models/blog')
 
-test('an individual blog can be modified', async () => {
+test('an individual blog can be modified (increment likes by 1)', async () => {
   const blog = await Blog.find({})
   const id = blog[0].id
+  const originalLikes = blog[0].likes
     
   const updatedBlog = {
     title: 'Velveeta Mac and Cheese',
-    author: 'Cecili',
+    author: 'Bob',
     url: 'www.boogle.com',
-    likes: 12
+    likes: originalLikes+1
   }
-  
-  console.log('original item = ', blog[0].author)
+
+  console.log('original item = ', blog[0])
   await api
     .put(`/api/blogs/${id}`)
     .send(updatedBlog)
@@ -24,7 +25,7 @@ test('an individual blog can be modified', async () => {
 
   const response = await api.get('/api/blogs')
 
-  console.log('changed item =', response.body[0].author)
+  console.log('changed item =', response.body[0])
 })
 
 
