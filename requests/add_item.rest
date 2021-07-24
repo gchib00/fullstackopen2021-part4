@@ -2,8 +2,8 @@ POST http://localhost:3001/api/blogs
 content-type: application/json
 
 {
-  "title": "Instant Pot Chicken Breast",
-  "author": "Stephanie",
-  "url": "https://iamafoodblog.com/instant-pot-chicken-breast/",
-  "likes": 0
+  "title": "Carrot Cake Can Be Good",
+  "author": "Liam Tyson",
+  "url": "https://carrot4life.com/cake/",
+  "likes": 2
 }
