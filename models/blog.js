@@ -5,7 +5,8 @@ const blogSchema = new mongoose.Schema({
   title: String,
   author: String,
   url: String,
-  likes: Number
+  likes: Number,
+  user: Object
 })
   
 const Blog = mongoose.model('Blog', blogSchema)

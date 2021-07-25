@@ -1,9 +1,9 @@
-POST http://localhost:3001/api/blogs
+POST http://localhost:3000/api/blogs
 content-type: application/json
 
 {
-  "title": "Carrot Cake Can Be Good",
-  "author": "Liam Tyson",
-  "url": "https://carrot4life.com/cake/",
-  "likes": 2
+  "title": "Baloons matter",
+  "author": "Michelle Ufario",
+  "url": "https://lipdotipo.br/blns8/",
+  "likes": 0
 }

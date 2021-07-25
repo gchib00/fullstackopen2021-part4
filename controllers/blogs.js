@@ -1,9 +1,16 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const User = require('../models/user')
 const logger = require('../utils/logger')
 
 blogsRouter.get('/', async (request, response) => {
+  const user = await User.findById('60fc41a50f842844ddeb8069')
   const blogs = await Blog.find({})
+  blogs.map(blog => {
+    if (blog.user == undefined) {
+      blog.user = user
+    }
+  })
   response.json(blogs)
 }) 
 
@@ -28,13 +35,15 @@ blogsRouter.put('/:id', async (request, response) => {
   
 })
   
-blogsRouter.post('/', (request, response) => {
+blogsRouter.post('/', async (request, response) => {
   logger.error(`request is equal to: ${request}`)
+  const user = await User.findById('60fc41a50f842844ddeb8069')
   const blog = new Blog ({
     title: request.body.title,
     author: request.body.author,
     url: request.body.url,
-    likes: request.body.likes
+    likes: request.body.likes,
+    user: user
   })
   if (blog.likes == undefined) {
     blog.likes = 0
