@@ -1,7 +1,6 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
-const logger = require('../utils/logger')
 const jwt = require('jsonwebtoken')
 
 const getTokenFrom = request => {
@@ -28,24 +27,23 @@ blogsRouter.delete('/:id/', async (request, response) => {
   response.status(204).end()
 }) 
 
-// eslint-disable-next-line no-unused-vars
+
 blogsRouter.put('/:id', async (request, response) => {
-  const id = request.params.id
   const body = request.body
+  console.log(body)
   const updatedBlog = {
+    user: body.user,
     title: body.title,
     author: body.author,
     url: body.url,
     likes: body.likes
   }
-  await Blog.findByIdAndUpdate(id, updatedBlog, { new: true })
-  response.json(updatedBlog)
+  const blog = await Blog.findOneAndUpdate({title: body.title}, updatedBlog, {new: true})
+  response.json(blog)
   response.status(200).end()
-  
 })
 
 blogsRouter.post('/', async (request, response) => {
-  logger.error(`request is equal to: ${request}`)
   const token = getTokenFrom(request)
   // eslint-disable-next-line no-undef
   const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -64,8 +62,8 @@ blogsRouter.post('/', async (request, response) => {
   if (blog.likes == undefined) {
     blog.likes = 0
   }
-  if (blog.title == undefined) {
-    response.status(400).end('Title was empty')
+  if (blog.title === '' || blog.title.length < 1) {
+    response.status(401).end('Title was empty')
   } else {
     const addBlog = async () => {
       const result = await blog.save()
