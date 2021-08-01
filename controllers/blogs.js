@@ -23,14 +23,15 @@ blogsRouter.get('/', async (request, response) => {
 }) 
 
 blogsRouter.delete('/:id/', async (request, response) => {
-  await Blog.findByIdAndRemove(request.params.id)
+  // const blogTobeDeleted = await Blog.findById({_id: request.params.id})
+  // console.log(blogTobeDeleted)
+  await Blog.findByIdAndDelete({_id: request.params.id})
   response.status(204).end()
 }) 
 
 
 blogsRouter.put('/:id', async (request, response) => {
   const body = request.body
-  console.log(body)
   const updatedBlog = {
     user: body.user,
     title: body.title,
